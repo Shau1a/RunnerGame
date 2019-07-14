@@ -1,0 +1,431 @@
+$sandy: rgba(249,199,136,1)
+$violet: rgba(202,151,154,1)
+$dark-violet: rgba(155,114,129,1)
+$mainfont: 'Neucha'
+$menu-bg-width: 510px
+
+@keyframes hut-bounce 
+	0%
+		transform: rotate(39deg)
+	25%
+		transform: rotate(35deg)
+	50%
+		transform: rotate(39deg)
+	75%
+		transform: rotate(43deg)
+	100%
+		transform: rotate(39deg)
+
+html, 
+body
+	margin: 0
+	padding: 0
+	max-height: 100%
+
+%bg-settings
+	background:
+		repeat: no-repeat
+	background:
+  		position: center center
+
+%menu-items
+	background-image: url('/assets/images/gui/24034074.png')
+	background:
+		repeat: no-repeat
+
+%menu-dec
+	background-image: url('/assets/images/gui/13540.png')
+	background:
+		repeat: no-repeat
+
+%text-dec
+	font-family: $mainfont
+	font-weight: 700
+	color: $sandy
+	position: absolute
+	text-align: center
+	text-shadow: 1px 1px #F3E7CF, -1px -1px #56433D
+	left: 0
+	right: 0
+
+.body-image
+	display: block
+	position: fixed
+	width: 100%
+	height: 100%
+	@extend %bg-settings
+	background: #f9c59c
+	background-image: url('/assets/images/scene/dessert/1/background.png')
+	background:
+		size: cover
+		attachment: fixed
+
+.header
+	@extend %bg-settings
+	width: 100%
+	height: 120px
+	padding-top: 40px
+	background-image: url('/assets/text/GameName.png') 
+	background:
+		size: contain
+	min-width: 800px
+	transform-origin: 50% 50%
+	transition: all 1s ease-in-out
+	transform: scale(0, 0)
+
+.header-scale
+	transform: scale(1, 1)
+
+.content__wrapper
+	display: block
+	width: 800px
+	min-width: 600px
+	box-sizing: border-box
+	height: 100%
+	margin:
+		top: 20px
+		right: auto
+		left: auto
+		bottom: 40px
+	padding: 20px
+	border: 18px solid #c38b73
+	border-radius: 20px
+	position: relative
+	&:before
+		content: ''
+		display: block
+		position: absolute
+		background: transparentize($sandy, 0.5)
+		border-radius: 10px
+		overflow: hidden
+		top: -5px 
+		left: -5px
+		right: -5px
+		bottom: -5px		
+.menu
+	display: block
+	position: relative
+	margin: auto
+	width: 550px
+	height: 450px
+		
+	.menu__background
+		@extend %menu-items
+		display: block
+		margin: auto
+		width: $menu-bg-width
+		height: 350px
+		z-index: 100
+		background:
+			position: -11px -11px 
+
+	.menu__decoration
+		@extend %menu-dec
+		position: absolute
+		width: 195px
+		height: 111px
+		background:
+			position: -290px -70px
+		top: -50px
+		right: -61px
+		transform: rotate(39deg)
+		&:hover
+			animation: hut-bounce 1s linear
+
+	.menu__greeting
+		@extend %text-dec
+		font-size: 2em
+		top: 28px
+	
+	.menu__scores
+		@extend %text-dec
+		font-size: 1.2em
+		top: 80px
+		letter-spacing: .1em
+
+	.menu__rule
+		@extend %text-dec
+		font-size: 1em
+		top: 110px
+		letter-spacing: .1em
+		color: $violet
+		text-shadow: none
+
+	.menu__pers-choice
+		position: absolute
+		top: 30%
+		width: $menu-bg-width - 100px
+		margin-left:  - ($menu-bg-width - 100px) / 2 
+		left: 50%
+		padding: 10px 5px
+		display: flex
+		justify-content: space-around
+		align-items: center
+
+		.menu__female, 
+		.menu__male
+			width: 140px
+			height: 140px
+			border: 5px solid #65380D
+			border-radius: 6px
+			background: transparentize($violet, .4)
+			cursor: pointer
+			transition: box-shadow .2s ease-in-out
+			overflow: hidden
+			position: relative
+			&:after 
+				content: ""
+				position: absolute 
+				top: -1em 
+				left: -4em
+				width: 180%
+				height: 200%
+				background: linear-gradient(to left, rgba(255,255,255,.0), rgba(255,255,255,.8), rgba(255,255,255,.0)) no-repeat -2em 0%
+				background-size: 2em 100%
+				transform: skewX(-50deg)
+				overflow: hidden
+			&:active
+				transform: scale(.9, .9)
+			&:hover
+				&:after 
+					transition: 2s linear
+					background-position: 100% 0%
+					transition: box-shadow .2s ease-in-out, background .3s ease-in
+
+		.menu__female
+			@extend %bg-settings
+			background-image: url('/assets/images/Idle.png')
+			background:
+				size: cover
+
+		.menu__male
+			@extend %bg-settings
+			background-image: url('')
+			background:
+				size: cover
+			transform: scale(-1, 1) 
+			&:active
+				transform: scale(-.9, .9)
+
+	.menu__button-background
+		@extend %menu-items
+		display: block
+		margin: -5px auto 0
+		width: 472px
+		height: 85px
+		z-index: -1
+		background:
+			position: -31px -661px 
+
+		.menu__button-start
+			@extend %text-dec
+			display: block
+			position: relative
+			margin: auto
+			width: 80%
+			height: 50%
+			top: 20px
+			background: none
+			border: none
+			font-size: 1.2em
+			letter-spacing: .1em
+			cursor: pointer
+			&:disabled
+				color: transparentize($sandy, 0.7)
+				text-shadow: none
+				cursor: default
+	
+	.menu__icons
+		position: absolute
+		display: flex
+		top: 0 
+		bottom: 0
+		right: -100px
+		left: -100px
+		padding: 10px
+		align-items: center
+		justify-content: space-between
+		flex-wrap: wrap
+		div
+			display: block
+			height: 80%
+
+		.menu__icons_flex-wrap
+			display: flex
+			justify-content: space-around
+			flex-direction: column
+
+		.menu__icons-sound,
+		.menu__icons-info,
+		.menu__icons-rate,
+		.menu__icons-engine
+			@extend %menu-items
+			display: block
+			width: 92px
+			height: 92px
+			//overflow: hidden
+			border: 3px solid #6B5533
+			box-sizing: border-box
+			border-radius: 50%
+			transform: scale(.8, .8)
+			cursor: pointer
+			&:hover
+				filter: saturate(200%)
+			&:active
+				transform: scale(.75, .75)
+
+		.menu__icons-sound
+			background:
+				position: -667px -139px
+
+		.menu__icons-info
+			background:
+				position: -975px -264px
+
+		.menu__icons-rate
+			background:
+				position: -976px -139px
+
+		.menu__icons-engine
+			background:
+				position: -872px -264px
+
+
+
+.menu__pers-active
+	box-shadow: 2px 2px 15px 15px transparentize($violet, 0.5), -2px -2px 15px 15px transparentize($violet, 0.5)
+
+.menu__icons-deactive
+	&:after,
+	&:before
+		content: ''
+		display: block
+		position: relative
+		width: 10px
+		height: 122px
+		top: -18px
+		left: 40px
+		background: transparentize(#c00, .2)
+		border-radius: 4px
+		transform: rotate(45deg)
+	&:after
+		transform: rotate(-45deg)
+		top: -140px
+
+
+
+.gameField
+	background: transparentize($sandy, .5)
+	position: fixed
+	width: 100%
+	height: 100%
+	.canvas-holder
+		text-align: center
+
+		p
+			font-family: $mainfont
+			font-size: 16px
+			font-weight: 900
+			color: #fff
+			margin-bottom: 5px
+	.menu__icons
+		position: fixed
+		display: flex
+		right: 0
+		left: 0
+		bottom: 20px
+		padding: 10px
+		align-items: center
+		justify-content: space-around
+		flex-wrap: wrap
+
+		.menu__icons-sound,
+		.menu__icons-play,
+		.menu__icons-stop,
+		.menu__icons-main-menu
+			@extend %menu-items
+			display: block
+			width: 92px
+			height: 92px
+			//overflow: hidden
+			border: 3px solid #6B5533
+			box-sizing: border-box
+			border-radius: 50%
+			transform: scale(.5, .5)
+			cursor: pointer
+			&:hover
+				filter: saturate(200%)
+			&:active
+				transform: scale(.45, .45)
+
+		.menu__icons-sound
+			background:
+				position: -667px -139px
+
+		.menu__icons-play
+			background:
+				position: -565px -15px
+
+		.menu__icons-stop
+			background:
+				position: -1078px -264px
+
+		.menu__icons-main-menu
+			background:
+				position: -873px -15px
+
+
+
+.show-block
+	display: block
+
+.hide-block
+	display: none
+
+.blur-bg
+	z-index: -1
+	filter: blur(5px)
+
+.header-bg-game
+	position: relative
+	transform: scale(1, 1)
+	top: 40px
+	padding-top: 20px
+	margin-bottom: 20px
+	min-width: 320px
+	height: 90px
+
+@keyframes overlay-open
+	0% 
+		transform: scale(0,0)
+	25% 
+		transform: scale(1,1)
+	75%
+		transform: scale(1,1)
+	100% 
+		transform: scale(0,0)
+
+.overlay
+	position: absolute
+	top: 0
+	bottom: 0
+	left: 0
+	right: 0
+	background: #708090 
+	z-index: 100
+	transform-origin: 50% 50%
+	transition: all 3s ease-in-out
+	transform: scale(0,0)
+	&:before
+		content: 'Wait, please...'
+		display: block
+		font-size: 46px
+		font-family: $mainfont
+		text-align: center
+		position: relative
+		top: 50%
+		color: #fff
+
+.overlay-animation
+	animation: overlay-open 3s ease-in-out forwards
+

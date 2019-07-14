@@ -1,0 +1,6 @@
+.gameField {
+  display: block;
+  margin: auto;
+  width: 100%;
+  text-align: center;
+  min-height: 440px; }

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Wild Adventures</title>
+	<link rel="stylesheet" href="css/main.css">
+	<link rel="stylesheet" href="css/font.css">
+</head>
+<body>
+<div class="" id="body-image"></div> 
+
+
+ <div class="" id="content">
+	<header class="header"></header>
+	<div class="content__wrapper">
+		<div class="menu">
+			<div class="menu__icons">
+				<div><div class="menu__icons_flex-wrap">
+					<div class="menu__icons-sound menu__icons-deactive"></div>
+					<div class="menu__icons-info"></div>
+				</div></div>
+				<div><div class="menu__icons_flex-wrap">
+					<div class="menu__icons-engine"></div>
+					<div class="menu__icons-rate"></div>
+				</div></div>
+			</div>
+			<div class="menu__background"></div>
+			<div class="menu__decoration"></div>
+			<div class="menu__greeting"></div>
+			<div class="menu__scores"></div>
+			<div class="menu__rule">Выбери своего героя!</div>
+			<div class="menu__pers-choice">
+				<div class="menu__female"></div>
+				<!-- <div class="menu__male"></div> -->
+			</div>
+			<div class="menu__button-background">
+			<button class="menu__button-start" disabled>Начать игру!</button></div>
+		</div>
+	</div>
+</div> 
+
+
+<div class="" id="gameField">
+	<header class="header header-bg-game"></header>
+	<div class="canvas-holder">
+		<p>"Клик" - чтобы прыгать</p>
+		<canvas id="canvas"></canvas>
+	</div>
+	<div class="menu__icons">
+		<div class="menu__icons-sound menu__icons-deactive"></div>
+		<div class="menu__icons-play"></div>		
+		<div class="menu__icons-stop"></div>
+		<div class="menu__icons-main-menu"></div>
+	</div>
+</div>
+
+
+<!-- <script src='js/main.js'></script>	 -->
+<!-- <script src="js/startmenu.js"></script>  -->
+
+<script>
+	let js = {
+		include : function (_path) {
+			let ajax = new XMLHttpRequest();
+			ajax.open('GET', _path, false);
+			ajax.send(null);
+			let source = ajax.responseText;
+			eval(source);
+		},
+	};
+
+	window.onload = function() {
+		js.include('js/startmenu.js');
+	}
+</script>
+</body>
+</html>

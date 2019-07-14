@@ -1,0 +1,479 @@
+@-webkit-keyframes hut-bounce {
+  0% {
+    -webkit-transform: rotate(39deg);
+    transform: rotate(39deg); }
+  25% {
+    -webkit-transform: rotate(35deg);
+    transform: rotate(35deg); }
+  50% {
+    -webkit-transform: rotate(39deg);
+    transform: rotate(39deg); }
+  75% {
+    -webkit-transform: rotate(43deg);
+    transform: rotate(43deg); }
+  100% {
+    -webkit-transform: rotate(39deg);
+    transform: rotate(39deg); } }
+
+@keyframes hut-bounce {
+  0% {
+    -webkit-transform: rotate(39deg);
+    transform: rotate(39deg); }
+  25% {
+    -webkit-transform: rotate(35deg);
+    transform: rotate(35deg); }
+  50% {
+    -webkit-transform: rotate(39deg);
+    transform: rotate(39deg); }
+  75% {
+    -webkit-transform: rotate(43deg);
+    transform: rotate(43deg); }
+  100% {
+    -webkit-transform: rotate(39deg);
+    transform: rotate(39deg); } }
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  max-height: 100%; }
+
+.body-image, .header, .menu .menu__pers-choice .menu__female, .menu .menu__pers-choice .menu__male {
+  background-repeat: no-repeat;
+  background-position: center center; }
+
+.menu .menu__background, .menu .menu__button-background, .menu .menu__icons .menu__icons-sound,
+.menu .menu__icons .menu__icons-info,
+.menu .menu__icons .menu__icons-rate,
+.menu .menu__icons .menu__icons-engine, .gameField .menu__icons .menu__icons-sound,
+.gameField .menu__icons .menu__icons-play,
+.gameField .menu__icons .menu__icons-stop,
+.gameField .menu__icons .menu__icons-main-menu {
+  background-image: url("/assets/images/gui/24034074.png");
+  background-repeat: no-repeat; }
+
+.menu .menu__decoration {
+  background-image: url("/assets/images/gui/13540.png");
+  background-repeat: no-repeat; }
+
+.menu .menu__greeting, .menu .menu__scores, .menu .menu__rule, .menu .menu__button-background .menu__button-start {
+  font-family: "Neucha";
+  font-weight: 700;
+  color: #f9c788;
+  position: absolute;
+  text-align: center;
+  text-shadow: 1px 1px #F3E7CF, -1px -1px #56433D;
+  left: 0;
+  right: 0; }
+
+.body-image {
+  display: block;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: #f9c59c;
+  background-image: url("/assets/images/scene/dessert/1/background.png");
+  background-size: cover;
+  background-attachment: fixed; }
+
+.header {
+  width: 100%;
+  height: 120px;
+  padding-top: 40px;
+  background-image: url("/assets/text/GameName.png");
+  background-size: contain;
+  min-width: 800px;
+  -webkit-transform-origin: 50% 50%;
+  transform-origin: 50% 50%;
+  -webkit-transition: all 1s ease-in-out;
+  transition: all 1s ease-in-out;
+  -webkit-transform: scale(0, 0);
+  transform: scale(0, 0); }
+
+.header-scale {
+  -webkit-transform: scale(1, 1);
+  transform: scale(1, 1); }
+
+.content__wrapper {
+  display: block;
+  width: 800px;
+  min-width: 600px;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  height: 100%;
+  margin-top: 20px;
+  margin-right: auto;
+  margin-left: auto;
+  margin-bottom: 40px;
+  padding: 20px;
+  border: 18px solid #c38b73;
+  border-radius: 20px;
+  position: relative; }
+  .content__wrapper:before {
+    content: '';
+    display: block;
+    position: absolute;
+    background: rgba(249, 199, 136, 0.5);
+    border-radius: 10px;
+    overflow: hidden;
+    top: -5px;
+    left: -5px;
+    right: -5px;
+    bottom: -5px; }
+
+.menu {
+  display: block;
+  position: relative;
+  margin: auto;
+  width: 550px;
+  height: 450px; }
+  .menu .menu__background {
+    display: block;
+    margin: auto;
+    width: 510px;
+    height: 350px;
+    z-index: 100;
+    background-position: -11px -11px; }
+  .menu .menu__decoration {
+    position: absolute;
+    width: 195px;
+    height: 111px;
+    background-position: -290px -70px;
+    top: -50px;
+    right: -61px;
+    -webkit-transform: rotate(39deg);
+    transform: rotate(39deg); }
+    .menu .menu__decoration:hover {
+      -webkit-animation: hut-bounce 1s linear;
+      animation: hut-bounce 1s linear; }
+  .menu .menu__greeting {
+    font-size: 2em;
+    top: 28px; }
+  .menu .menu__scores {
+    font-size: 1.2em;
+    top: 80px;
+    letter-spacing: .1em; }
+  .menu .menu__rule {
+    font-size: 1em;
+    top: 110px;
+    letter-spacing: .1em;
+    color: #ca979a;
+    text-shadow: none; }
+  .menu .menu__pers-choice {
+    position: absolute;
+    top: 30%;
+    width: 410px;
+    margin-left: -205px;
+    left: 50%;
+    padding: 10px 5px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-pack: distribute;
+    justify-content: space-around;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center; }
+    .menu .menu__pers-choice .menu__female,
+    .menu .menu__pers-choice .menu__male {
+      width: 140px;
+      height: 140px;
+      border: 5px solid #65380D;
+      border-radius: 6px;
+      background: rgba(202, 151, 154, 0.6);
+      cursor: pointer;
+      -webkit-transition: -webkit-box-shadow .2s ease-in-out;
+      transition: -webkit-box-shadow .2s ease-in-out;
+      transition: box-shadow .2s ease-in-out;
+      transition: box-shadow .2s ease-in-out, -webkit-box-shadow .2s ease-in-out;
+      overflow: hidden;
+      position: relative; }
+      .menu .menu__pers-choice .menu__female:after,
+      .menu .menu__pers-choice .menu__male:after {
+        content: "";
+        position: absolute;
+        top: -1em;
+        left: -4em;
+        width: 180%;
+        height: 200%;
+        background: -webkit-gradient(linear, right top, left top, from(rgba(255, 255, 255, 0)), color-stop(rgba(255, 255, 255, 0.8)), to(rgba(255, 255, 255, 0))) no-repeat -2em 0%;
+        background: linear-gradient(to left, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0)) no-repeat -2em 0%;
+        background-size: 2em 100%;
+        -webkit-transform: skewX(-50deg);
+        transform: skewX(-50deg);
+        overflow: hidden; }
+      .menu .menu__pers-choice .menu__female:active,
+      .menu .menu__pers-choice .menu__male:active {
+        -webkit-transform: scale(0.9, 0.9);
+        transform: scale(0.9, 0.9); }
+      .menu .menu__pers-choice .menu__female:hover:after,
+      .menu .menu__pers-choice .menu__male:hover:after {
+        -webkit-transition: 2s linear;
+        transition: 2s linear;
+        background-position: 100% 0%;
+        -webkit-transition: background .3s ease-in, -webkit-box-shadow .2s ease-in-out;
+        transition: background .3s ease-in, -webkit-box-shadow .2s ease-in-out;
+        transition: box-shadow .2s ease-in-out, background .3s ease-in;
+        transition: box-shadow .2s ease-in-out, background .3s ease-in, -webkit-box-shadow .2s ease-in-out; }
+    .menu .menu__pers-choice .menu__female {
+      background-image: url("/assets/images/Idle.png");
+      background-size: cover; }
+    .menu .menu__pers-choice .menu__male {
+      background-image: url("");
+      background-size: cover;
+      -webkit-transform: scale(-1, 1);
+      transform: scale(-1, 1); }
+      .menu .menu__pers-choice .menu__male:active {
+        -webkit-transform: scale(-0.9, 0.9);
+        transform: scale(-0.9, 0.9); }
+  .menu .menu__button-background {
+    display: block;
+    margin: -5px auto 0;
+    width: 472px;
+    height: 85px;
+    z-index: -1;
+    background-position: -31px -661px; }
+    .menu .menu__button-background .menu__button-start {
+      display: block;
+      position: relative;
+      margin: auto;
+      width: 80%;
+      height: 50%;
+      top: 20px;
+      background: none;
+      border: none;
+      font-size: 1.2em;
+      letter-spacing: .1em;
+      cursor: pointer; }
+      .menu .menu__button-background .menu__button-start:disabled {
+        color: rgba(249, 199, 136, 0.3);
+        text-shadow: none;
+        cursor: default; }
+  .menu .menu__icons {
+    position: absolute;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    top: 0;
+    bottom: 0;
+    right: -100px;
+    left: -100px;
+    padding: 10px;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap; }
+    .menu .menu__icons div {
+      display: block;
+      height: 80%; }
+    .menu .menu__icons .menu__icons_flex-wrap {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -ms-flex-pack: distribute;
+      justify-content: space-around;
+      -webkit-box-orient: vertical;
+      -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+      flex-direction: column; }
+    .menu .menu__icons .menu__icons-sound,
+    .menu .menu__icons .menu__icons-info,
+    .menu .menu__icons .menu__icons-rate,
+    .menu .menu__icons .menu__icons-engine {
+      display: block;
+      width: 92px;
+      height: 92px;
+      border: 3px solid #6B5533;
+      -webkit-box-sizing: border-box;
+      box-sizing: border-box;
+      border-radius: 50%;
+      -webkit-transform: scale(0.8, 0.8);
+      transform: scale(0.8, 0.8);
+      cursor: pointer; }
+      .menu .menu__icons .menu__icons-sound:hover,
+      .menu .menu__icons .menu__icons-info:hover,
+      .menu .menu__icons .menu__icons-rate:hover,
+      .menu .menu__icons .menu__icons-engine:hover {
+        -webkit-filter: saturate(200%);
+        filter: saturate(200%); }
+      .menu .menu__icons .menu__icons-sound:active,
+      .menu .menu__icons .menu__icons-info:active,
+      .menu .menu__icons .menu__icons-rate:active,
+      .menu .menu__icons .menu__icons-engine:active {
+        -webkit-transform: scale(0.75, 0.75);
+        transform: scale(0.75, 0.75); }
+    .menu .menu__icons .menu__icons-sound {
+      background-position: -667px -139px; }
+    .menu .menu__icons .menu__icons-info {
+      background-position: -975px -264px; }
+    .menu .menu__icons .menu__icons-rate {
+      background-position: -976px -139px; }
+    .menu .menu__icons .menu__icons-engine {
+      background-position: -872px -264px; }
+
+.menu__pers-active {
+  -webkit-box-shadow: 2px 2px 15px 15px rgba(202, 151, 154, 0.5), -2px -2px 15px 15px rgba(202, 151, 154, 0.5);
+  box-shadow: 2px 2px 15px 15px rgba(202, 151, 154, 0.5), -2px -2px 15px 15px rgba(202, 151, 154, 0.5); }
+
+.menu__icons-deactive:after, .menu__icons-deactive:before {
+  content: '';
+  display: block;
+  position: relative;
+  width: 10px;
+  height: 122px;
+  top: -18px;
+  left: 40px;
+  background: rgba(204, 0, 0, 0.8);
+  border-radius: 4px;
+  -webkit-transform: rotate(45deg);
+  transform: rotate(45deg); }
+
+.menu__icons-deactive:after {
+  -webkit-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+  top: -140px; }
+
+.gameField {
+  background: rgba(249, 199, 136, 0.5);
+  position: fixed;
+  width: 100%;
+  height: 100%; }
+  .gameField .canvas-holder {
+    text-align: center; }
+    .gameField .canvas-holder p {
+      font-family: "Neucha";
+      font-size: 16px;
+      font-weight: 900;
+      color: #fff;
+      margin-bottom: 5px; }
+  .gameField .menu__icons {
+    position: fixed;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    right: 0;
+    left: 0;
+    bottom: 20px;
+    padding: 10px;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -ms-flex-pack: distribute;
+    justify-content: space-around;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap; }
+    .gameField .menu__icons .menu__icons-sound,
+    .gameField .menu__icons .menu__icons-play,
+    .gameField .menu__icons .menu__icons-stop,
+    .gameField .menu__icons .menu__icons-main-menu {
+      display: block;
+      width: 92px;
+      height: 92px;
+      border: 3px solid #6B5533;
+      -webkit-box-sizing: border-box;
+      box-sizing: border-box;
+      border-radius: 50%;
+      -webkit-transform: scale(0.5, 0.5);
+      transform: scale(0.5, 0.5);
+      cursor: pointer; }
+      .gameField .menu__icons .menu__icons-sound:hover,
+      .gameField .menu__icons .menu__icons-play:hover,
+      .gameField .menu__icons .menu__icons-stop:hover,
+      .gameField .menu__icons .menu__icons-main-menu:hover {
+        -webkit-filter: saturate(200%);
+        filter: saturate(200%); }
+      .gameField .menu__icons .menu__icons-sound:active,
+      .gameField .menu__icons .menu__icons-play:active,
+      .gameField .menu__icons .menu__icons-stop:active,
+      .gameField .menu__icons .menu__icons-main-menu:active {
+        -webkit-transform: scale(0.45, 0.45);
+        transform: scale(0.45, 0.45); }
+    .gameField .menu__icons .menu__icons-sound {
+      background-position: -667px -139px; }
+    .gameField .menu__icons .menu__icons-play {
+      background-position: -565px -15px; }
+    .gameField .menu__icons .menu__icons-stop {
+      background-position: -1078px -264px; }
+    .gameField .menu__icons .menu__icons-main-menu {
+      background-position: -873px -15px; }
+
+.show-block {
+  display: block; }
+
+.hide-block {
+  display: none; }
+
+.blur-bg {
+  z-index: -1;
+  -webkit-filter: blur(5px);
+  filter: blur(5px); }
+
+.header-bg-game {
+  position: relative;
+  -webkit-transform: scale(1, 1);
+  transform: scale(1, 1);
+  top: 40px;
+  padding-top: 20px;
+  margin-bottom: 20px;
+  min-width: 320px;
+  height: 90px; }
+
+@-webkit-keyframes overlay-open {
+  0% {
+    -webkit-transform: scale(0, 0);
+    transform: scale(0, 0); }
+  25% {
+    -webkit-transform: scale(1, 1);
+    transform: scale(1, 1); }
+  75% {
+    -webkit-transform: scale(1, 1);
+    transform: scale(1, 1); }
+  100% {
+    -webkit-transform: scale(0, 0);
+    transform: scale(0, 0); } }
+
+@keyframes overlay-open {
+  0% {
+    -webkit-transform: scale(0, 0);
+    transform: scale(0, 0); }
+  25% {
+    -webkit-transform: scale(1, 1);
+    transform: scale(1, 1); }
+  75% {
+    -webkit-transform: scale(1, 1);
+    transform: scale(1, 1); }
+  100% {
+    -webkit-transform: scale(0, 0);
+    transform: scale(0, 0); } }
+
+.overlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #708090;
+  z-index: 100;
+  -webkit-transform-origin: 50% 50%;
+  transform-origin: 50% 50%;
+  -webkit-transition: all 3s ease-in-out;
+  transition: all 3s ease-in-out;
+  -webkit-transform: scale(0, 0);
+  transform: scale(0, 0); }
+  .overlay:before {
+    content: 'Wait, please...';
+    display: block;
+    font-size: 46px;
+    font-family: "Neucha";
+    text-align: center;
+    position: relative;
+    top: 50%;
+    color: #fff; }
+
+.overlay-animation {
+  -webkit-animation: overlay-open 3s ease-in-out forwards;
+  animation: overlay-open 3s ease-in-out forwards; }
