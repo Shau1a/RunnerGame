@@ -49,11 +49,11 @@ body {
 .gameField .menu__icons .menu__icons-play,
 .gameField .menu__icons .menu__icons-stop,
 .gameField .menu__icons .menu__icons-main-menu {
-  background-image: url("/assets/images/gui/24034074.png");
+  background-image: url("assets/images/gui/24034074.png");
   background-repeat: no-repeat; }
 
 .menu .menu__decoration {
-  background-image: url("/assets/images/gui/13540.png");
+  background-image: url("assets/images/gui/13540.png");
   background-repeat: no-repeat; }
 
 .menu .menu__greeting, .menu .menu__scores, .menu .menu__rule, .menu .menu__button-background .menu__button-start {
@@ -72,7 +72,7 @@ body {
   width: 100%;
   height: 100%;
   background: #f9c59c;
-  background-image: url("/assets/images/scene/dessert/1/background.png");
+  background-image: url("assets/images/scene/dessert/1/background.png");
   background-size: cover;
   background-attachment: fixed; }
 
@@ -80,7 +80,7 @@ body {
   width: 100%;
   height: 120px;
   padding-top: 40px;
-  background-image: url("/assets/text/GameName.png");
+  background-image: url("assets/text/GameName.png");
   background-size: contain;
   min-width: 800px;
   -webkit-transform-origin: 50% 50%;
@@ -216,7 +216,7 @@ body {
         transition: box-shadow .2s ease-in-out, background .3s ease-in;
         transition: box-shadow .2s ease-in-out, background .3s ease-in, -webkit-box-shadow .2s ease-in-out; }
     .menu .menu__pers-choice .menu__female {
-      background-image: url("/assets/images/Idle.png");
+      background-image: url("assets/images/Idle.png");
       background-size: cover; }
     .menu .menu__pers-choice .menu__male {
       background-image: url("");
