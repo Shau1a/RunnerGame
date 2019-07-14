@@ -49,6 +49,7 @@ body {
 .gameField .menu__icons .menu__icons-play,
 .gameField .menu__icons .menu__icons-stop,
 .gameField .menu__icons .menu__icons-main-menu {
+
   background-image: url("../assets/images/gui/24034074.png");
   background-repeat: no-repeat; }
 
@@ -72,7 +73,9 @@ body {
   width: 100%;
   height: 100%;
   background: #f9c59c;
+
   background-image: url("../assets/images/scene/dessert/1/background.png");
+
   background-size: cover;
   background-attachment: fixed; }
 
@@ -80,7 +83,9 @@ body {
   width: 100%;
   height: 120px;
   padding-top: 40px;
+
   background-image: url("../assets/text/GameName.png");
+
   background-size: contain;
   min-width: 800px;
   -webkit-transform-origin: 50% 50%;
