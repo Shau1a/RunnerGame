@@ -7,40 +7,6 @@ gameField.className = 'gameField';
 bgImage.className = 'body-image blur-bg';
 
 
-/*let start, stop, ID;
-
-let playButton = document.querySelector('.gameField .menu__icons .menu__icons-play');
-let pauseButton = document.querySelector('.gameField .menu__icons .menu__icons-stop');
-let menuButton = document.querySelector('.gameField .menu__icons .menu__icons-main-menu');
-
-playButton.addEventListener('click', function() {
-  if (!ID) {
-    play();
-  }
-});
-
-pauseButton.addEventListener('click', function() {
-  if (ID) {
-    stop();
-  }
-});
-
-menuButton.addEventListener('click', function() {
-  let overlay = document.createElement('div');
-    overlay.className = 'overlay';
-    document.body.appendChild(overlay);
-    overlay.classList.add('overlay-animation');
-    
-    setTimeout(function() {
-      js.include('js/startmenu.js');
-    }, 1000);
-    
-    setTimeout(function() {
-      overlay.remove();
-    }, 3200);
-});*/
-
-
 // partly copied by Frank Poth 12/24/2017
 
 
