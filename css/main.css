@@ -382,8 +382,8 @@ body {
       -webkit-box-sizing: border-box;
       box-sizing: border-box;
       border-radius: 50%;
-      -webkit-transform: scale(0.5, 0.5);
-      transform: scale(0.5, 0.5);
+      -webkit-transform: scale(0.8, 0.8);
+      transform: scale(0.8, 0.8);
       cursor: pointer; }
       .gameField .menu__icons .menu__icons-sound:hover,
       .gameField .menu__icons .menu__icons-play:hover,
@@ -395,8 +395,8 @@ body {
       .gameField .menu__icons .menu__icons-play:active,
       .gameField .menu__icons .menu__icons-stop:active,
       .gameField .menu__icons .menu__icons-main-menu:active {
-        -webkit-transform: scale(0.45, 0.45);
-        transform: scale(0.45, 0.45); }
+        -webkit-transform: scale(0.75, 0.75);
+        transform: scale(0.75, 0.75); }
     .gameField .menu__icons .menu__icons-sound {
       background-position: -667px -139px; }
     .gameField .menu__icons .menu__icons-play {
@@ -405,7 +405,7 @@ body {
       background-position: -1078px -264px; }
     .gameField .menu__icons .menu__icons-main-menu {
       background-position: -873px -15px; }
-
+      
 .show-block {
   display: block; }
 

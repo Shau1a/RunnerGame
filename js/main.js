@@ -7,14 +7,13 @@ gameField.className = 'gameField';
 bgImage.className = 'body-image blur-bg';
 
 
-// partly copied by Frank Poth 12/24/2017
 
 
 (function() { "use strict";
 
-  const TILE_SIZE = 16;
-  const WORLD_HEIGHT = 144;
-  const WORLD_WIDTH = 256;
+  const TILE_SIZE = 4;
+  canvas.height = 436;
+  canvas.width = 872;
 
   
   //////////////////////////////////////////////
@@ -38,7 +37,7 @@ bgImage.className = 'body-image blur-bg';
         this.frame_index = 0;
         this.frame_value = this.frame_set[this.frame_index];
         this.count = 0;
-        this.delay = delay || 15;
+        this.delay = delay || 10;
       }
     },
 
@@ -57,11 +56,7 @@ bgImage.className = 'body-image blur-bg';
     }
   };
 
-
-
-  //===========Получение картинки из набора 
-  //- то есть отслеживание ее физическоо 
-  //положения в спрайте==============//
+  //===========Получение картинки из набора - то есть отслеживание ее физического положения в спрайте==============//
     
   let Frame = function(x, y, width, height) {
     this.height = height;
@@ -69,6 +64,7 @@ bgImage.className = 'body-image blur-bg';
     this.x      = x;
     this.y      = y;
   };
+
 
   ///////////////////////////////////////////////////////
   //===========Хранилище игровых объектов==============//
@@ -88,7 +84,8 @@ bgImage.className = 'body-image blur-bg';
         let object = this.pool.pop();
         object.reset(parameters);
         this.objects.push(object);
-      } else {
+      } 
+      else {
         this.objects.push(new this.object(parameters.x, parameters.y));
       }
     },
@@ -117,8 +114,8 @@ bgImage.className = 'body-image blur-bg';
   let DangerousGround = function(x, y) {
     this.alive = true;
     this.animation = new Animation(display.tile_sheet.frame_sets[1], 15);
-    this.height = 30; 
-    this.width = Math.floor(Math.random() * 64 + 48);
+    this.height = 190; 
+    this.width = Math.floor(Math.random() * 200 + 50);
     this.x = x; 
     this.y = y;
   };
@@ -131,7 +128,7 @@ bgImage.className = 'body-image blur-bg';
     collideObject:function(player) {
       if (!player.jumping && player.x + player.width * 0.5 > this.x + this.width * 0.2 && player.x + player.width * 0.5 < this.x + this.width * 0.8) {
         player.alive = false;
-        player.y = WORLD_HEIGHT - 63;
+        player.y = canvas.height - 162;
         player.animation.change(display.tile_sheet.frame_sets[5], 6);
       }
     },
@@ -144,7 +141,6 @@ bgImage.className = 'body-image blur-bg';
     // Обнуление параметров объекта
     reset:function(parameters) {
       this.alive = true;
-      this.width = Math.floor(Math.random() * 64 + 32);
       this.x = parameters.x;
       this.y = parameters.y;
     },
@@ -159,8 +155,8 @@ bgImage.className = 'body-image blur-bg';
   let Cactus = function(x, y) {
     this.alive = true;
     this.animation = new Animation(display.tile_sheet.frame_sets[0], 15);
-    this.height = 42; 
-    this.width = 28;
+    this.height = 100; 
+    this.width = 60;
     this.x = x; 
     this.y = y;
   };
@@ -171,7 +167,7 @@ bgImage.className = 'body-image blur-bg';
     collideObject:function(player) {
       if (!player.jumping && player.x + player.width * 0.5 > this.x - this.width * 0.1 && player.x + player.width * 0.5 < this.x + this.width * 0.8) {
         player.alive = false;
-        player.y = WORLD_HEIGHT - 63;
+        player.y = canvas.height - 162;
         player.animation.change(display.tile_sheet.frame_sets[5], 6);
       }
     },
@@ -196,26 +192,24 @@ bgImage.className = 'body-image blur-bg';
 
 //===========3==============//
  let GoodGround = function(x, y) {
-
     this.alive = true;
-    this.animation = new Animation(display.tile_sheet.frame_sets[2], 15);
-    this.height = 30; 
-    this.width = Math.floor(Math.random() * 64 + 48);
+    this.animation = new Animation(display.tile_sheet.frame_sets[2], 40);
+    this.height = 90; 
+    this.width = Math.floor(Math.random() * 200 + 150);
     this.x = x; 
     this.y = y;
     this.coins = true;
     this.coins_amount = Math.floor(4 + Math.random() * 5);
   };
-
  
   GoodGround.prototype = {
     constructor: GoodGround,
 
     collideObject:function(player) {
-      if (this.y < WORLD_HEIGHT - 40 && player.x + player.width * 0.5 > this.x - this.width * 0.1 && player.x + player.width * 0.5 < this.x + this.width * 0.8 && player.jumping) {
-        if (player.x + player.width < this.x + this.width + 5) {
+      if (this.y < canvas.height - 100 && player.x + player.width * 0.5 > this.x - this.width * 0.1 && player.x + player.width * 0.5 < this.x + this.width * 0.8 && player.jumping) {
+        if (player.x + player.width < this.x + this.width + 15) {
           player.animation.change(display.tile_sheet.frame_sets[3], 6);
-          player.y = this.y - player.height + 18;
+          player.y = this.y - player.height + 40;
         }
       }
     },
@@ -226,13 +220,12 @@ bgImage.className = 'body-image blur-bg';
 
     reset:function(parameters) {
       this.alive = true;
-      this.width = Math.floor(Math.random() * 64 + 48);
       this.x = parameters.x;
       this.y = parameters.y;
     },
 
     update:function(){
-      this.animation.update();
+    // this.animation.update();
       this.x -= game.speed;
     }
 
@@ -242,8 +235,8 @@ bgImage.className = 'body-image blur-bg';
   let Coin = function(x, y) {
     this.alive = true;
     this.animation = new Animation(display.tile_sheet.extra_set[0], 1);
-    this.width = 15;
-    this.height = 15;
+    this.width = 25;
+    this.height = 25;
     this.x = x; 
     this.y = y;
     this.grabbed = false;
@@ -261,7 +254,7 @@ bgImage.className = 'body-image blur-bg';
         player.bonus += 1;
         this.y = 0;
         this.grabbed = true;
-        this.animation.change(display.tile_sheet.extra_set[1], 1);
+        this.animation.change(display.tile_sheet.extra_set[1], 10);
       }
     },
 
@@ -287,26 +280,26 @@ bgImage.className = 'body-image blur-bg';
   };
 
 //===========5==============//
-  let ImageObject = function(path, i, x, y, width, height) {
+  let ImageObject = function(path, speed, x, y, width, height) {
       this.img = new Image();
       this.x = x || 0;
       this.y = y || 0;
-      this.width = width || WORLD_WIDTH + 2;
-      this.height = height || WORLD_HEIGHT;
+      this.width = width || canvas.width;
+      this.height = height || canvas.height;
       this.img.src = path;
-      this.i = i || .2;
+      this.speed = speed || .2;
     };
 
-      ImageObject.prototype = {
-        constructor: ImageObject,
+  ImageObject.prototype = {
+    constructor: ImageObject,
 
-        update: function() {
-          this.x -= this.i;
-          if (this.x + this.width <= 0) {
-            this.x = WORLD_WIDTH - 2;
-          }
-        }
-      };
+    update: function() {
+      this.x -= this.speed;
+      if (this.x + this.width <= 0) {
+        this.x = canvas.width - 10;
+      }
+    }
+  };
 
 
 /////////////////////////////////
@@ -322,13 +315,13 @@ bgImage.className = 'body-image blur-bg';
 
     onOff:function(event) {
       event.preventDefault();
-      let key_state = (event.type == "mousedown" || event.type == "touchstart") ? true : false;
+      let key_state = event.type == "mousedown" ? true : false;
       if (controller.state != key_state) controller.active = key_state;
       controller.state = key_state;
     }
   };
 
-
+  //логика отображения (отрисовеки фреймов)
   display = {
 
     buffer:document.createElement("canvas").getContext("2d"),
@@ -360,17 +353,18 @@ bgImage.className = 'body-image blur-bg';
       extra_set: [[0,1,2,3,4,5,6,7,8,9], //монеты... в моем случае все равно нормально не анимируются
                   [10]],// пустой квадрат
 
-      image:new Image(),// Картинки загружаются в блоке инициализации
+      image: new Image(),// Картинки загружаются в блоке инициализации
       coinFrames: new Image(),
     },
 
-     bg: {
+    bg: {
       sky: new Image(),
     },
 
+    //отрисовка всего изображения в каждой итерации по слоям: сначала в буфере, потом все отрисовывается в контекст
     render:function() {
 
-      this.buffer.drawImage(this.bg.sky, 0, 0, WORLD_WIDTH, WORLD_HEIGHT);
+      this.buffer.drawImage(this.bg.sky, 0, 0, canvas.width, canvas.height);
       this.buffer.drawImage(horizont1.img, horizont1.x, horizont1.y, horizont1.width, horizont1.height);
       this.buffer.drawImage(horizont2.img, horizont2.x, horizont2.y, horizont2.width, horizont2.height);
 
@@ -388,6 +382,9 @@ bgImage.className = 'body-image blur-bg';
         this.buffer.drawImage(this.tile_sheet.image, frame.x, frame.y, frame.width, frame.height, dangerousGround.x, dangerousGround.y, dangerousGround.width, dangerousGround.height);
       }
 
+      this.buffer.drawImage(ground1.img, ground1.x, ground1.y, ground1.width, ground1.height);
+      this.buffer.drawImage(ground2.img, ground2.x, ground2.y, ground2.width, ground2.height);
+
       // Draw goodGround
       for (let index = game.object_manager.goodGround_pool.objects.length - 1; index > -1; -- index) {
         let goodGround = game.object_manager.goodGround_pool.objects[index];
@@ -396,34 +393,26 @@ bgImage.className = 'body-image blur-bg';
         this.buffer.drawImage(this.tile_sheet.image, frame.x, frame.y, frame.width, frame.height, goodGround.x, goodGround.y, goodGround.width, goodGround.height);
       }
 
-
-      this.buffer.drawImage(ground1.img, ground1.x, ground1.y, ground1.width, ground1.height);
-      this.buffer.drawImage(ground2.img, ground2.x, ground2.y, ground2.width, ground2.height);
-      
-
       // Draw distance
-      this.buffer.font = "14px Arial";
+      this.buffer.font = "18px Arial";
       this.buffer.fillStyle = "#ffffff";
-      this.buffer.fillText(String(Math.floor(game.distance/10) + " / " + Math.floor(game.max_distance/10)), 10, 20);
+      this.buffer.fillText(String(Math.floor(game.distance/40) + " / " + Math.floor(game.max_distance/40)), 10, 20);
 
       // Draw bonus
-      this.buffer.font = "12px Arial";
+      this.buffer.font = "16px Arial";
       this.buffer.fillStyle = "#ffffff";
-      this.buffer.fillText(String("Coins: " + Math.floor(game.player.bonus / 72) + " / " + Math.floor(game.max_bonus)), 100, 20);
-
+      this.buffer.fillText(String("Coins: " + Math.floor(game.player.bonus / 72) + " / " + Math.floor(game.max_bonus/72)), 100, 20);
 
       // Draw Player
       let frame = this.tile_sheet.frames[game.player.animation.frame_value];
       this.buffer.drawImage(this.tile_sheet.image, frame.x, frame.y, frame.width, frame.height, game.player.x, game.player.y, game.player.width, game.player.height);
      
-
       // Draw Cactus
       for (let index = game.object_manager.cactus_pool.objects.length - 1; index > -1; -- index) {
         let cactus = game.object_manager.cactus_pool.objects[index];
         let frame = this.tile_sheet.frames[cactus.animation.frame_value];
         this.buffer.drawImage(this.tile_sheet.image, frame.x, frame.y-22, frame.width, frame.height, cactus.x, cactus.y+2, cactus.width, cactus.height);
       }
-
 
       // Draw Coins
       for (let index = game.object_manager.coins_pool.objects.length - 1; index > -1; -- index) {
@@ -432,83 +421,57 @@ bgImage.className = 'body-image blur-bg';
         this.buffer.drawImage(this.tile_sheet.coinFrames, frame.x, frame.y, frame.width, frame.height, coin.x, coin.y, coin.width, coin.height);
       }
 
-      this.context.drawImage(this.buffer.canvas, 0, 0, WORLD_WIDTH, WORLD_HEIGHT, 0, 0, this.context.canvas.width, this.context.canvas.height);
-
-    },
-
-    resize:function(event) {
-      display.context.canvas.width = document.documentElement.clientWidth - 16;
-      if (display.context.canvas.width > document.documentElement.clientHeight - 16) {
-        display.context.canvas.width = document.documentElement.clientHeight - 16;
-      }
-
-      display.context.canvas.height = display.context.canvas.width * 0.5625;
-
-      display.buffer.imageSmoothingEnabled = true;
-      display.context.imageSmoothingEnabled = true;
-
-      display.render();
+      this.context.drawImage(this.buffer.canvas, 0, 0, canvas.width, canvas.height, 0, 0, this.context.canvas.width, this.context.canvas.height);
     }
   };
 
-
-
+ //добавление фреймов из спрайта в массив frames (чтобы не высчитывать координаты вручную)
   (function getFrames() {
-      let run = function() {
-        let fullWidth = 1760;
-        let fullHeight = 170;
-        let startX = 9;
-        let startY = 445;
-        for (let i = 0; i < 8; i++) {
-          display.tile_sheet.frames.push(new Frame(startX, startY, fullWidth/8, fullHeight));
-          startX += fullWidth/8;
-        }
-      };
-      run();
-
-      let jump = function() {
-        let fullWidth = 2200;
-        let fullHeight = 189;
-        let startX = 10;
-        let startY = 10;
-        for (let i = 0; i < 10; i++) {
-          display.tile_sheet.frames.push(new Frame(startX, startY, fullWidth/10, fullHeight));
-          startX += fullWidth/10;
-        }
-      };
-      jump();
-
-      let death = function() {
-        let fullWidth = 1890;
-        let fullHeight = 189;
-        let startX = 10;
-        let startY = 219;
-        for (let i = 0; i < 10; i++) {
-          display.tile_sheet.frames.push(new Frame(startX, startY, fullWidth/10, fullHeight));
-          startX += fullWidth/10;
-        }
+    let run = function() {
+      let fullWidth = 1760;
+      let fullHeight = 170;
+      let startX = 9;
+      let startY = 445;
+      for (let i = 0; i < 8; i++) {
+        display.tile_sheet.frames.push(new Frame(startX, startY, fullWidth/8, fullHeight));
+        startX += fullWidth/8;
       }
-      death();
+    };
+    run();
 
-      let coins = function() {
-        let fullWidth = 498;
-        let fullHeight = 60;
-        let startX = 1382;
-        let startY = 846;
-        for (let i = 0; i < 10; i++) {
-          display.tile_sheet.frames.push(new Frame(startX, startY, fullWidth/10, fullHeight));
-          startX += fullWidth/10;
-        }
+    let jump = function() {
+      let fullWidth = 2200;
+      let fullHeight = 189;
+      let startX = 10;
+      let startY = 10;
+      for (let i = 0; i < 10; i++) {
+        display.tile_sheet.frames.push(new Frame(startX, startY, fullWidth/10, fullHeight));
+        startX += fullWidth/10;
       }
-      coins();
-    })();
+    };
+    jump();
+
+    let death = function() {
+      let fullWidth = 1890;
+      let fullHeight = 189;
+      let startX = 10;
+      let startY = 219;
+      for (let i = 0; i < 10; i++) {
+        display.tile_sheet.frames.push(new Frame(startX, startY, fullWidth/10, fullHeight));
+        startX += fullWidth/10;
+      }
+    }
+    death();
+  })();
 
 
+  //логика вычисляющая нахождение каждого объекта в каждой итерации и логика взаимодействия объектов
   game = {
     distance:0,
     max_distance:0,
     max_bonus: 0,
-    speed:3,
+    speed: 5,
+    max_speed: 10,
 
     area: {
       offset:0,
@@ -517,7 +480,7 @@ bgImage.className = 'body-image blur-bg';
         game.distance += game.speed * .8;
         if (game.distance > game.max_distance) game.max_distance = game.distance;
 
-        if (game.player.bonus > game.max_bonus) game.max_bonus = game.player.bonus/72;
+        if (game.player.bonus > game.max_bonus) game.max_bonus = game.player.bonus;
       }
     },
 
@@ -542,8 +505,8 @@ bgImage.className = 'body-image blur-bg';
           ground2.update();
         }
         
-        game.speed = (game.speed >= TILE_SIZE * 0.5) ? TILE_SIZE * 0.5 : game.speed + 0.001;/* Постепеное наращивание скорости игры */
-        game.player.animation.delay = Math.floor(12 - game.speed);/* задержка кадров анимации игрока уменьшается с увеличением скорости игры, чтобы казалось, что игрок бежит быстрее */
+        game.speed = (game.speed >= game.max_speed) ? game.max_speed : game.speed + 0.0025;/* Постепеное наращивание скорости игры */
+        game.player.animation.delay = Math.floor(15 - game.speed);/* задержка кадров анимации игрока уменьшается с увеличением скорости игры, чтобы казалось, что игрок бежит быстрее */
         game.area.scroll();// Отражение результатов и бонусов по монетам
 
         if (game.player.alive) {
@@ -551,12 +514,12 @@ bgImage.className = 'body-image blur-bg';
           if (controller.active && !game.player.jumping) {// Get user input
             controller.active = false;
             game.player.jumping = true;
-            game.player.y_velocity -= 15;
+            game.player.y_velocity -= 35;
             game.player.animation.change(display.tile_sheet.frame_sets[4], 15);
           }
 
           if (game.player.jumping == false) {
-            game.player.animation.change(display.tile_sheet.frame_sets[3], Math.floor(TILE_SIZE - game.speed));
+            game.player.animation.change(display.tile_sheet.frame_sets[3], Math.floor(15 - game.speed));
           }
 
           game.player.update();
@@ -567,7 +530,10 @@ bgImage.className = 'body-image blur-bg';
             game.player.y_velocity = 0;
             game.player.jumping = false;
           }
-        } else {
+        } 
+
+        //при смерти игрока по промотке анимации (сета с соответствующими с фреймами) до конца игра перезапускается
+        else {
           game.player.x -= game.speed;
           game.speed *= 0.9;
           if (game.player.animation.frame_index == game.player.animation.frame_set.length - 1) game.reset();
@@ -584,7 +550,7 @@ bgImage.className = 'body-image blur-bg';
     object_manager: {
 
       count:0,
-      delay:Math.floor(50 + Math.random() * (101 - 50)),
+      delay:Math.floor(60 + Math.random() * 100),
 
       cactus_pool: new Pool(Cactus),
       goodGround_pool: new Pool(GoodGround),
@@ -593,25 +559,27 @@ bgImage.className = 'body-image blur-bg';
 
       spawn:function() {
         this.count ++;
+
         if (this.count == this.delay) {
           this.count = 0;
-          this.delay = 70;
+          game.speed <= 8 ? this.delay = Math.floor(60 + Math.random() * 80) : this.delay = Math.floor(50 + Math.random() * 50);
+
 
           /* Рандомное появление игровых обектов */
           let randomize = Math.floor(1 + Math.random() * 3); 
 
           if (randomize == 1) {
-            this.dangerousGround_pool.get( {x: WORLD_WIDTH, y: WORLD_HEIGHT - 32} );
+            this.dangerousGround_pool.get( {x: canvas.width, y: canvas.height - 120} );
           } 
 
           if (randomize == 2) {
-            this.cactus_pool.get( {x: WORLD_WIDTH, y: WORLD_HEIGHT - 60});
+            this.cactus_pool.get( {x: canvas.width, y: canvas.height - 150});
           }
 
           if (randomize == 3) {
-            let options = [WORLD_HEIGHT - 33, WORLD_HEIGHT - 80];
+            let options = [canvas.height - 80, canvas.height - 250];
             let y = options[Math.floor(Math.random() * 2)];
-            this.goodGround_pool.get({x: WORLD_WIDTH, y: y});
+            this.goodGround_pool.get({x: canvas.width, y: y});
           }
         }
       },
@@ -690,14 +658,14 @@ bgImage.className = 'body-image blur-bg';
 
     player: {
 
-      stateY: WORLD_HEIGHT - 67,
+      stateY: canvas.height - 165,
       alive: true,
-      animation:new Animation([6], 10),
+      animation:new Animation([6], 12),
       jumping: false,
-      height: 220/4, 
-      width: 169/3,
+      height: 129, 
+      width: 140,
       x: 20, 
-      y: WORLD_HEIGHT - 67,
+      y: canvas.height - 165,
       y_velocity: 0,
       bonus: 0,
 
@@ -707,7 +675,7 @@ bgImage.className = 'body-image blur-bg';
       },
 
       update:function() {
-        game.player.y_velocity += 0.5;
+        game.player.y_velocity += .8;
         game.player.y += game.player.y_velocity;
         game.player.y_velocity *= 0.9;
       }
@@ -716,104 +684,91 @@ bgImage.className = 'body-image blur-bg';
     reset:function() {
 
       this.distance = 0;
+      this.player.bonus = 0;
       this.player.reset();
 
-      /* Put all of our objects away. */
+      //убираем все объекты с карты
       this.object_manager.cactus_pool.storeAll();
       this.object_manager.goodGround_pool.storeAll();
       this.object_manager.dangerousGround_pool.storeAll();
+      this.object_manager.coins_pool.storeAll();
 
-      this.speed = 3;
+      this.speed = 5;
 
     }
 
   };
 
 
-// BACKGROUND
+  // BACKGROUND
 
-let horizont1 = new ImageObject('assets/images/2.png', .1*game.speed);
-let horizont2 = new ImageObject('assets/images/2.png', .1*game.speed, WORLD_WIDTH, 0);
+  let horizont1 = new ImageObject('assets/images/2.png', .1*game.speed);
+  let horizont2 = new ImageObject('assets/images/2.png', .1*game.speed, canvas.width, 0);
 
-let cactuses1 = new ImageObject('assets/images/4.png', .2*game.speed);
-let cactuses2 = new ImageObject('assets/images/4.png', .2*game.speed, WORLD_WIDTH, 0);
+  let cactuses1 = new ImageObject('assets/images/4.png', .2*game.speed);
+  let cactuses2 = new ImageObject('assets/images/4.png', .2*game.speed, canvas.width, 0);
 
-let sand1 = new ImageObject('assets/images/3.png', .2*game.speed);
-let sand2 = new ImageObject('assets/images/3.png', .2*game.speed, WORLD_WIDTH, 0);
+  let sand1 = new ImageObject('assets/images/3.png', .2*game.speed);
+  let sand2 = new ImageObject('assets/images/3.png', .2*game.speed, canvas.width, 0);
 
-let ground1 = new ImageObject('assets/images/5.png', game.speed);
-let ground2 = new ImageObject('assets/images/5.png', game.speed, WORLD_WIDTH, 0);
+  let ground1 = new ImageObject('assets/images/5.png', game.speed);
+  let ground2 = new ImageObject('assets/images/5.png', game.speed, canvas.width, 0);
 
 
-
-      ////////////////////
-    //// INITIALIZE ////
-  ////////////////////
-
-  display.buffer.canvas.height = WORLD_HEIGHT;
-  display.buffer.canvas.width  = WORLD_WIDTH;
+  // INITIALIZE 
+ 
+  display.buffer.canvas.height = canvas.height;
+  display.buffer.canvas.width  = canvas.width;
 
   display.bg.sky.src = "assets/images/1.png";
   display.tile_sheet.coinFrames.src = 'assets/images/coins.png';
-
   display.tile_sheet.image.src = "assets/images/css_sprites(8).png";
 
-  display.tile_sheet.image.addEventListener("load", function(event) {
+  let ID; // requestAnimationFrame
 
-    display.resize();
+  let playButton = document.querySelector('.gameField .menu__icons .menu__icons-play');
+  let pauseButton = document.querySelector('.gameField .menu__icons .menu__icons-stop');
+  let menuButton = document.querySelector('.gameField .menu__icons .menu__icons-main-menu');
 
-  });
+  playButton.addEventListener('click', function() {
+    if (!ID) {
+      start();
+    }
+  }, true);
 
+  pauseButton.addEventListener('click', function() {
+    if (ID) {
+      stop(ID);
+      ID = null;
+    }
+  }, true);
 
-let ID;
+  menuButton.addEventListener('click', function() {
+    let overlay = document.createElement('div');
+      overlay.className = 'overlay';
+      document.body.appendChild(overlay);
+      overlay.classList.add('overlay-animation');
+      
+      setTimeout(function() {
+        js.include('js/startmenu.js');
+      }, 1000);
+      
+      setTimeout(function() {
+        overlay.remove();
+      }, 3200);
+  }, true);
 
-let playButton = document.querySelector('.gameField .menu__icons .menu__icons-play');
-let pauseButton = document.querySelector('.gameField .menu__icons .menu__icons-stop');
-let menuButton = document.querySelector('.gameField .menu__icons .menu__icons-main-menu');
-
-playButton.addEventListener('click', function() {
-  if (!ID) {
-    start();
-  }
-}, true);
-
-pauseButton.addEventListener('click', function() {
-  if (ID) {
-    stop(ID);
-    ID = null;
-  }
-}, true);
-
-menuButton.addEventListener('click', function() {
-  let overlay = document.createElement('div');
-    overlay.className = 'overlay';
-    document.body.appendChild(overlay);
-    overlay.classList.add('overlay-animation');
     
-    setTimeout(function() {
-      js.include('js/startmenu.js');
-    }, 1000);
-    
-    setTimeout(function() {
-      overlay.remove();
-    }, 3200);
-}, true);
-
-  
   window.start = function() {
     game.engine.loop();
   };
 
   window.stop = function(ID) {
     window.cancelAnimationFrame(ID);
-  }
+  };
 
-
-  window.addEventListener("resize", display.resize);
   window.addEventListener("mousedown", controller.onOff);
   window.addEventListener("mouseup", controller.onOff);
-  window.addEventListener("touchstart", controller.onOff);
-  window.addEventListener("touchend", controller.onOff);
 
+  start();
 })();
-
