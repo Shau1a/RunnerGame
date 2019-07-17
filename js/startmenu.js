@@ -1,41 +1,25 @@
-//====================================================//
 //=================ЗАГОЛОВОК==========================//
-//====================================================//
 
 let headerGameName = document.querySelector('.header');
 
-	setTimeout(function(){
-		headerGameName.classList.add('header-scale');
-	}, 100);
+setTimeout(function(){
+	headerGameName.classList.add('header-scale');
+}, 100);
 
 
-
-//====================================================//
 //=================УСТАНОВКА ИМЕНИ И ОЧКОВ============//
-//====================================================//
 
-let gamerName = 'Kate';
 let menuScores = 0;
 
-let greetingField = document.querySelector('.menu .menu__greeting');
-function setGreeting(name) {
-	greetingField.innerHTML = `Добро пожаловать, ${name}`;
-};
 let menuScoresField = document.querySelector('.menu .menu__scores');
 function setScores(score) {
 	menuScoresField.innerHTML = `Твой лучший счет: ${score}`; 
 };
 
-setGreeting(gamerName);
 setScores(menuScores);
 
-gamerName.onchange = setGreeting(gamerName);
-menuScores.onchange = setScores(menuScores);	
 
-
-//====================================================//
 //=================АКТИВАЦИЯ КНОПКИ МЕНЮ==============//
-//====================================================//
 
 (function() {
 	let startButton = document.querySelector('.menu .menu__button-start');
@@ -70,7 +54,8 @@ menuScores.onchange = setScores(menuScores);
 				overlay.classList.add('overlay-animation');
 				
 				setTimeout(function() {
-					js.include('js/main.js');
+					openGame();
+					playGame();
 				}, 1000);
 				
 				setTimeout(function() {
@@ -82,10 +67,8 @@ menuScores.onchange = setScores(menuScores);
 })();
 
 
-//====================================================//
 //=================АНИМАЦИЯ КНОПКИ ЗВУКА==============//
-//====================================================//
-//
+
 (function() {
 	let soundButton = document.querySelector('.menu .menu__icons .menu__icons-sound');
 
@@ -95,14 +78,16 @@ menuScores.onchange = setScores(menuScores);
 })();
 
 
-//====================================================//
+
 //=================УСТАНОВКА КЛАССОВ БЛОКА============//
-//====================================================//
+
 
 let mainContent = document.getElementById('content');
 let gameField = document.getElementById('gameField');
 let bgImage = document.getElementById('body-image');
 
-mainContent.className = 'content';
-gameField.className = 'gameField hide-block';
-bgImage.className = 'body-image';
+function openMenu() {
+	mainContent.className = 'content';
+	gameField.className = 'gameField hide-block';
+	bgImage.className = 'body-image';
+};

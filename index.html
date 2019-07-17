@@ -4,6 +4,7 @@
 	<meta charset="UTF-8">
 	<title>Wild Adventures</title>
 	<link rel="stylesheet" href="css/main.css">
+	<link rel="stylesheet" href="css/overlays.css">
 	<link rel="stylesheet" href="css/font.css">
 </head>
 <body>
@@ -55,23 +56,35 @@
 </div>
 
 
-<!-- <script src='js/main.js'></script>	 -->
-<!-- <script src="js/startmenu.js"></script>  -->
+<div class="modal-overlay modal_closed" id="modal-overlay">
+    <div class="modal " id="modal">
+        <header class="modal__header">
+            <a href="#" class="modal__close close" id="modal-close" title="Закрыть модальное окно">Закрыть</a>
+        </header>
 
- <script>
-	let js = {
-		include : function (_path) {
-			let ajax = new XMLHttpRequest();
-			ajax.open('GET', _path, false);
-			ajax.send(null);
-			let source = ajax.responseText;
-			eval(source);
-		},
-	};
+        <main class="modal__content">
+            <div class="form-field">
+                <label for="name">Ваше имя:</label>
+                <input class="input__default" autofocus="true" type="text" id="name" name="name" data-regx="(?:\w+)?[а-яА-Я]*$">
+            </div>
+        </main>
 
+        <footer class="modal__footer">
+            <button id="modal-cancel" class="modal__cancel close" title="Отмена">Остаться инкогнито</button>
+            <button id="modal-save" class="modal__save" title="Сохранить">Сохранить данные</button>
+        </footer>
+    </div>
+</div>
+
+
+<script src="js/overlays.js"></script>
+<script src="js/startmenu.js"></script> 
+<script src='js/main.js'></script>	
+<script>
 	window.onload = function() {
-		js.include('js/startmenu.js');
-	} 
+		openMenu();
+		modalInit();
+	}
 </script>
 </body>
 </html>

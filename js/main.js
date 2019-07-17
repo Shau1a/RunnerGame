@@ -1,17 +1,13 @@
-let mainContent = document.getElementById('content');
-let gameField = document.getElementById('gameField');
-let bgImage = document.getElementById('body-image');
-
-mainContent.className = 'content hide-block';
-gameField.className = 'gameField';
-bgImage.className = 'body-image blur-bg';
+function openGame() {
+  mainContent.className = 'content hide-block';
+  gameField.className = 'gameField';
+  bgImage.className = 'body-image blur-bg';
+}
 
 
+function playGame() { 
+  "use strict";
 
-
-(function() { "use strict";
-
-  const TILE_SIZE = 4;
   canvas.height = 436;
   canvas.width = 872;
 
@@ -306,7 +302,6 @@ bgImage.className = 'body-image blur-bg';
 //===========ИГРА==============//
 /////////////////////////////////
 
-
   let controller, display, game;
 
 
@@ -315,13 +310,11 @@ bgImage.className = 'body-image blur-bg';
 
     onOff:function(event) {
       event.preventDefault();
-      let key_state = event.type == "mousedown" ? true : false;
-      if (controller.state != key_state) controller.active = key_state;
-      controller.state = key_state;
+      controller.active = event.type == "mousedown" ? true : false;
     }
   };
 
-  //логика отображения (отрисовеки фреймов)
+  //отображение (отрисовка фреймов)
   display = {
 
     buffer:document.createElement("canvas").getContext("2d"),
@@ -335,11 +328,11 @@ bgImage.className = 'body-image blur-bg';
               ],
 
       coin_frames: [new Frame(10, 10,  141,  141), new Frame(171, 10, 141,  141), 
-      new Frame(10, 171,  141,  141), new Frame(171, 171, 141,  141), 
-      new Frame(332, 10,  141,  141), new Frame(332, 171, 141,  141), 
-      new Frame(10, 332,  141,  141), new Frame(171, 332, 141,  141),
-      new Frame(332, 332,  141,  141), new Frame(493, 10, 141,  141),
-      new Frame(493, 171, 141, 141)],
+                  new Frame(10, 171,  141,  141), new Frame(171, 171, 141,  141), 
+                  new Frame(332, 10,  141,  141), new Frame(332, 171, 141,  141), 
+                  new Frame(10, 332,  141,  141), new Frame(171, 332, 141,  141),
+                  new Frame(332, 332,  141,  141), new Frame(493, 10, 141,  141),
+                  new Frame(493, 171, 141, 141)],
 
       frame_sets:[[0,1], // cactus
                   [2,3], // dangerous ground
@@ -355,16 +348,13 @@ bgImage.className = 'body-image blur-bg';
 
       image: new Image(),// Картинки загружаются в блоке инициализации
       coinFrames: new Image(),
-    },
-
-    bg: {
-      sky: new Image(),
+      sky: new Image()
     },
 
     //отрисовка всего изображения в каждой итерации по слоям: сначала в буфере, потом все отрисовывается в контекст
     render:function() {
 
-      this.buffer.drawImage(this.bg.sky, 0, 0, canvas.width, canvas.height);
+      this.buffer.drawImage(this.tile_sheet.sky, 0, 0, canvas.width, canvas.height);
       this.buffer.drawImage(horizont1.img, horizont1.x, horizont1.y, horizont1.width, horizont1.height);
       this.buffer.drawImage(horizont2.img, horizont2.x, horizont2.y, horizont2.width, horizont2.height);
 
@@ -479,12 +469,16 @@ bgImage.className = 'body-image blur-bg';
       scroll:function() {
         game.distance += game.speed * .8;
         if (game.distance > game.max_distance) game.max_distance = game.distance;
-
         if (game.player.bonus > game.max_bonus) game.max_bonus = game.player.bonus;
       }
     },
 
     engine: {
+
+      setScoresToMenu: function() {
+        menuScores = Math.floor(game.max_distance/40);
+        setScores(menuScores);
+      },
 
       loop:function() {
         game.engine.update();
@@ -511,7 +505,7 @@ bgImage.className = 'body-image blur-bg';
 
         if (game.player.alive) {
 
-          if (controller.active && !game.player.jumping) {// Get user input
+          if (controller.active && !game.player.jumping) {
             controller.active = false;
             game.player.jumping = true;
             game.player.y_velocity -= 35;
@@ -693,10 +687,11 @@ bgImage.className = 'body-image blur-bg';
       this.object_manager.dangerousGround_pool.storeAll();
       this.object_manager.coins_pool.storeAll();
 
+      game.engine.setScoresToMenu();
+
       this.speed = 5;
 
     }
-
   };
 
 
@@ -720,7 +715,7 @@ bgImage.className = 'body-image blur-bg';
   display.buffer.canvas.height = canvas.height;
   display.buffer.canvas.width  = canvas.width;
 
-  display.bg.sky.src = "assets/images/1.png";
+  display.tile_sheet.sky.src = "assets/images/1.png";
   display.tile_sheet.coinFrames.src = 'assets/images/coins.png';
   display.tile_sheet.image.src = "assets/images/css_sprites(8).png";
 
@@ -730,18 +725,20 @@ bgImage.className = 'body-image blur-bg';
   let pauseButton = document.querySelector('.gameField .menu__icons .menu__icons-stop');
   let menuButton = document.querySelector('.gameField .menu__icons .menu__icons-main-menu');
 
+  function abortGame() {
+    if (ID) {
+      stop(ID);
+      ID = null;
+    }
+  };
+
   playButton.addEventListener('click', function() {
     if (!ID) {
       start();
     }
   }, true);
 
-  pauseButton.addEventListener('click', function() {
-    if (ID) {
-      stop(ID);
-      ID = null;
-    }
-  }, true);
+  pauseButton.addEventListener('click', abortGame, true);
 
   menuButton.addEventListener('click', function() {
     let overlay = document.createElement('div');
@@ -750,7 +747,9 @@ bgImage.className = 'body-image blur-bg';
       overlay.classList.add('overlay-animation');
       
       setTimeout(function() {
-        js.include('js/startmenu.js');
+        abortGame();
+        game.engine.setScoresToMenu();
+        openMenu();
       }, 1000);
       
       setTimeout(function() {
@@ -767,8 +766,8 @@ bgImage.className = 'body-image blur-bg';
     window.cancelAnimationFrame(ID);
   };
 
+  start();
+
   window.addEventListener("mousedown", controller.onOff);
   window.addEventListener("mouseup", controller.onOff);
-
-  start();
-})();
+};
